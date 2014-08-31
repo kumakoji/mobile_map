@@ -45,12 +45,14 @@ var i=data.length;
 }
 var iw  = new google.maps.InfoWindow();
 
+var path=[];
 while(i-- >0){
 	var dat=data[i];
 	var obj={
 		position:new google.maps.LatLng(dat.lat,dat.lng),
 		map:map
 	};
+	path.push(new google.maps.LatLng(dat.lat,dat.lng));
 	var marker = new google.maps.Marker(obj);
 	console.log(marker);
      attach_message(map, marker, dat.content,iw);
@@ -59,7 +61,16 @@ while(i-- >0){
         //インフォウィンドウを消去 
          iw.close();
    });
-        }
+   }
+var flightPath = new google.maps.Polyline({
+		    path:path,
+		        geodesic: true,
+			    strokeColor: '#FF0000',
+			        strokeOpacity: 1.0,
+				    strokeWeight: 2
+				    });
+flightPath.setMap(map);
+new google.maps.LatLng(dat.lat,dat.lng)
 }
  </script>
  </head>
