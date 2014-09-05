@@ -15,11 +15,13 @@ def init():
 def input_log():
 	log = []
 	content = ""
+	id = 0
 	for line in open(argvs[1],'r'):
 		if 'AlarmManager' in line:
 			content = '"content":"'+content+'"'
-			log.append(lat+','+lng+','+content)	
-			content = ""
+			log.append(lat+','+lng+','+content)
+			id += 1;
+			content = str(id)+"<br>"
 		elif 'Location ' in line:
 			lat = line[:-1].split('\t')[1].split(': ')[1].split(', ')[0].replace("(","")
 			lng = line[:-1].split('\t')[1].split(': ')[1].split(', ')[1].replace(")","")
